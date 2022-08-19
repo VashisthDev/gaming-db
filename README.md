@@ -1,4 +1,3 @@
-@@ -1,27 +0,0 @@
 # GamingDb
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
