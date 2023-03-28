@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -6,27 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent {
-  connectedAccount = '0x1234567890abcdef';
+  connectedAccount = '0x3678723angj';
   isWalletConnected = true;
+  
+  constructor(private router: Router) { }
 
   connectWallet(): void {
     const extensionId = 'ebjabocgmjhfnlngeimpmapmkdjnioop';
-    const message = {
-      type: 'REQUEST_PERMISSIONS',
-      payload: {
-        app: 'My App',
-        blockchain: 'Tezos',
-        network: 'Mainnet'
-      }
-    };
-    const url = `chrome-extension://${extensionId}/?${JSON.stringify(message)}`;
-
-    window.location.href = url;
     window.open('templewallet://open', '_blank');
 
   }
   
   onSubmit(form: any) {
-    // Implement search form submission logic here
+    this.router.navigate(['search', form.value.search]);
   }
 }
