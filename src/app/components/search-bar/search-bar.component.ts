@@ -1,21 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
+  connectedAccount = '0x1234567890abcdef';
+  isWalletConnected = true;
 
-  constructor(private router: Router) { }
+  connectWallet(): void {
+    const extensionId = 'ebjabocgmjhfnlngeimpmapmkdjnioop';
+    const message = {
+      type: 'REQUEST_PERMISSIONS',
+      payload: {
+        app: 'My App',
+        blockchain: 'Tezos',
+        network: 'Mainnet'
+      }
+    };
+    const url = `chrome-extension://${extensionId}/?${JSON.stringify(message)}`;
 
-  ngOnInit(): void {
+    window.location.href = url;
+    window.open('templewallet://open', '_blank');
+
   }
-
-  onSubmit(form: NgForm) {
-    this.router.navigate(['search', form.value.search]);
+  
+  onSubmit(form: any) {
+    // Implement search form submission logic here
   }
-
 }
